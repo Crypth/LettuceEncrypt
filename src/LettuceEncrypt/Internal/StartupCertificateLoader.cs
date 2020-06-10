@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using McMaster.AspNetCore.Kestrel.Certificates;
 using Microsoft.Extensions.Hosting;
 
 namespace LettuceEncrypt.Internal
@@ -11,11 +12,11 @@ namespace LettuceEncrypt.Internal
     internal class StartupCertificateLoader : IHostedService
     {
         private readonly IEnumerable<ICertificateSource> _certSources;
-        private readonly CertificateSelector _selector;
+        private readonly IServerCertificateSelector _selector;
 
         public StartupCertificateLoader(
             IEnumerable<ICertificateSource> certSources,
-            CertificateSelector selector)
+            IServerCertificateSelector selector)
         {
             _certSources = certSources;
             _selector = selector;

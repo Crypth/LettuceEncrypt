@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Linq;
+using McMaster.AspNetCore.Kestrel.Certificates;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -10,13 +11,13 @@ namespace LettuceEncrypt.Internal.AcmeStates
     internal class ServerStartupState : SyncAcmeState
     {
         private readonly IOptions<LettuceEncryptOptions> _options;
-        private readonly CertificateSelector _selector;
+        private readonly IServerCertificateSelector _selector;
         private readonly ILogger<ServerStartupState> _logger;
 
         public ServerStartupState(
             AcmeStateMachineContext context,
             IOptions<LettuceEncryptOptions> options,
-            CertificateSelector selector,
+            IServerCertificateSelector selector,
             ILogger<ServerStartupState> logger) :
             base(context)
         {

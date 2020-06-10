@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using LettuceEncrypt.Internal.IO;
+using McMaster.AspNetCore.Kestrel.Certificates;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -17,13 +18,13 @@ namespace LettuceEncrypt.Internal.AcmeStates
         private readonly ILogger<ServerStartupState> _logger;
         private readonly IOptions<LettuceEncryptOptions> _options;
         private readonly AcmeCertificateFactory _acmeCertificateFactory;
-        private readonly CertificateSelector _selector;
+        private readonly IServerCertificateSelector _selector;
         private readonly IEnumerable<ICertificateRepository> _certificateRepositories;
         private readonly IClock _clock;
 
         public BeginCertificateCreationState(AcmeStateMachineContext context, ILogger<ServerStartupState> logger,
             IOptions<LettuceEncryptOptions> options, AcmeCertificateFactory acmeCertificateFactory,
-            CertificateSelector selector, IEnumerable<ICertificateRepository> certificateRepositories,
+            IServerCertificateSelector selector, IEnumerable<ICertificateRepository> certificateRepositories,
             IClock clock) : base(context)
         {
             _logger = logger;

@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using LettuceEncrypt.Internal.IO;
+using McMaster.AspNetCore.Kestrel.Certificates;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Logging;
 using Org.BouncyCastle.Asn1;
@@ -29,11 +30,11 @@ namespace LettuceEncrypt.Internal
 #endif
         private readonly IClock _clock;
         private readonly ILogger<TlsAlpnChallengeResponder> _logger;
-        private readonly CertificateSelector _certificateSelector;
+        private readonly IServerCertificateSelector _certificateSelector;
         private int _openChallenges = 0;
 
         public TlsAlpnChallengeResponder(
-            CertificateSelector certificateSelector,
+            IServerCertificateSelector certificateSelector,
             IClock clock,
             ILogger<TlsAlpnChallengeResponder> logger)
         {

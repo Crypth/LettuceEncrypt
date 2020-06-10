@@ -1,6 +1,7 @@
 // Copyright (c) Nate McMaster.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Connections;
 
@@ -21,5 +22,40 @@ namespace McMaster.AspNetCore.Kestrel.Certificates
         /// </para>
         /// </summary>
         X509Certificate2? Select(ConnectionContext context, string? domainName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="certificate"></param>
+        public void AddChallengeCert(X509Certificate2 certificate);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="certificate"></param>
+        public void Add(X509Certificate2 certificate);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domainName"></param>
+        /// <param name="certificate"></param>
+        /// <returns></returns>
+        public bool TryGet(string domainName, out X509Certificate2? certificate);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domainName"></param>
+        public void ClearChallengeCert(string domainName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<string> SupportedDomains { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domainName"></param>
+        /// <returns></returns>
+        public bool HasCertForDomain(string domainName);
     }
 }

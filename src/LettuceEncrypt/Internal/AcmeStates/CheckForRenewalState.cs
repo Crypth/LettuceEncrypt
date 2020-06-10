@@ -4,6 +4,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using LettuceEncrypt.Internal.IO;
+using McMaster.AspNetCore.Kestrel.Certificates;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -13,14 +14,14 @@ namespace LettuceEncrypt.Internal.AcmeStates
     {
         private readonly ILogger<CheckForRenewalState> _logger;
         private readonly IOptions<LettuceEncryptOptions> _options;
-        private readonly CertificateSelector _selector;
+        private readonly IServerCertificateSelector _selector;
         private readonly IClock _clock;
 
         public CheckForRenewalState(
             AcmeStateMachineContext context,
             ILogger<CheckForRenewalState> logger,
             IOptions<LettuceEncryptOptions> options,
-            CertificateSelector selector,
+            IServerCertificateSelector selector,
             IClock clock) : base(context)
         {
             _logger = logger;
