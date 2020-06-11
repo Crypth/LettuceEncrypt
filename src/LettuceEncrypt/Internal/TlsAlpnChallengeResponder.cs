@@ -57,7 +57,7 @@ namespace LettuceEncrypt.Internal
 
         public void OnSslAuthenticate(ConnectionContext context, SslServerAuthenticationOptions options)
         {
-            if (_openChallenges > 0)
+            if (_certificateSelector.HasChallengeCert())
             {
                 options.ApplicationProtocols.Add(s_acmeTlsProtocol);
             }
@@ -114,7 +114,7 @@ namespace LettuceEncrypt.Internal
                 // SSLStream on Windows throws with ephemeral key sets
                 // workaround from https://github.com/dotnet/runtime/issues/23749#issuecomment-388231655
                 var originalCert = cert;
-                cert = new X509Certificate2(cert.Export(X509ContentType.Pkcs12));
+                cert = new X509Certificate2(cert.Export(X509ContentType.Pkcs12),"", X509KeyStorageFlags.Exportable); // Made exportable for multinode purposes.
                 originalCert.Dispose();
             }
 
