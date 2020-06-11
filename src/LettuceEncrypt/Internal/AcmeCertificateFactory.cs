@@ -158,6 +158,8 @@ namespace LettuceEncrypt.Internal
             {
                 throw new InvalidOperationException();
             }
+            _logger.LogDebug($"CreateCertificateAsync waiting {_options.Value.TimeBeforeFirstChallenge.TotalSeconds} seconds to let other nodes startup.");
+            await Task.Delay(_options.Value.TimeBeforeFirstChallenge, cancellationToken);
 
             IOrderContext? orderContext = null;
             var orders = await _client.GetOrdersAsync();
@@ -238,7 +240,10 @@ namespace LettuceEncrypt.Internal
                 await PrepareTlsAlpnChallengeResponseAsync(authorizationContext, domainName, cancellationToken);
             }
 
-            await PrepareHttpChallengeResponseAsync(authorizationContext, domainName, cancellationToken);
+            if (_options.Value.UseHttp01Challenge)
+            {
+                await PrepareHttpChallengeResponseAsync(authorizationContext, domainName, cancellationToken);
+            }
 
             var retries = 60;
             var delay = TimeSpan.FromSeconds(2);
