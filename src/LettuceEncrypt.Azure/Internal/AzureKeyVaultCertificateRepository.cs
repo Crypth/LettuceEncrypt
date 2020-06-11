@@ -93,7 +93,7 @@ namespace LettuceEncrypt.Azure.Internal
 
                 var certificate = await secretClient.GetSecretAsync(normalizedName, null, token);
 
-                var cert = new X509Certificate2(Convert.FromBase64String(certificate.Value.Value));
+                var cert = new X509Certificate2(Convert.FromBase64String(certificate.Value.Value), "", X509KeyStorageFlags.Exportable);
 
                 _logger.LogInformation(
                     "Found certificate for {domainName} from Azure Key Vault with thumbprint {thumbprint}",
