@@ -22,7 +22,11 @@ namespace McMaster.AspNetCore.Kestrel.Certificates
         /// </para>
         /// </summary>
         X509Certificate2? Select(ConnectionContext context, string? domainName);
-
+        /// <summary>
+        ///  Does the server certificate selector have any challenge certificates available? We added this to replace the 
+        /// </summary>
+        /// <returns></returns>
+        public bool HasChallengeCert();
         /// <summary>
         /// 
         /// </summary>

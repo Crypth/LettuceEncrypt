@@ -147,5 +147,10 @@ namespace LettuceEncrypt.Internal
                 "Failed to validate certificate for {commonName} ({thumbprint}). This could cause an outage of your app.",
                 commonName, certificate.Thumbprint);
         }
+
+        public bool HasChallengeCert()
+        {
+            return _challengeCerts.Count > 0;
+        }
     }
 }
