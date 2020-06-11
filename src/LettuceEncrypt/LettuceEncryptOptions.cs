@@ -27,12 +27,19 @@ namespace LettuceEncrypt
         /// Indicate that you agree with ACME server's terms of service.
         /// </summary>
         public bool AcceptTermsOfService { get; set; }
-
+        /// <summary>
+        /// Use http Challenge. Usage is not implemented in our multinode version.
+        /// </summary>
+        public bool UseHttp01Challenge { get; set; } = false;
         /// <summary>
         /// The email address used to register with the certificate authority.
         /// </summary>
         public string EmailAddress { get; set; } = string.Empty;
 
+        /// <summary>
+        /// How long to wait before we send the first challenge. 
+        /// </summary>
+        public TimeSpan TimeBeforeFirstChallenge { get; set; }
         /// <summary>
         /// Use Let's Encrypt staging server.
         /// <para>
