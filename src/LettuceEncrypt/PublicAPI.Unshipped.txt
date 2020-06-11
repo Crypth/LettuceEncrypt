@@ -1,5 +1,14 @@
 #nullable enable
 LettuceEncrypt.Acme.ICertificateAuthorityConfiguration
 LettuceEncrypt.Acme.ICertificateAuthorityConfiguration.AcmeDirectoryUri.get -> System.Uri!
+LettuceEncrypt.LettuceEncryptOptions.TimeBeforeFirstChallenge.get -> System.TimeSpan
+LettuceEncrypt.LettuceEncryptOptions.TimeBeforeFirstChallenge.set -> void
+LettuceEncrypt.LettuceEncryptOptions.UseHttp01Challenge.get -> bool
+LettuceEncrypt.LettuceEncryptOptions.UseHttp01Challenge.set -> void
 Microsoft.AspNetCore.Hosting.LettuceEncryptKestrelHttpsOptionsExtensions
+Microsoft.Extensions.DependencyInjection.MultiNodeLettuceEncryptServiceCollectionExtensions
 static Microsoft.AspNetCore.Hosting.LettuceEncryptKestrelHttpsOptionsExtensions.UseLettuceEncrypt(this Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions! httpsOptions, System.IServiceProvider! applicationServices) -> Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions!
+static Microsoft.Extensions.DependencyInjection.MultiNodeLettuceEncryptServiceCollectionExtensions.AddNodeMasterLettuceEncrypt(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> LettuceEncrypt.ILettuceEncryptServiceBuilder!
+static Microsoft.Extensions.DependencyInjection.MultiNodeLettuceEncryptServiceCollectionExtensions.AddNodeMasterLettuceEncrypt(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, System.Action<LettuceEncrypt.LettuceEncryptOptions!>! configure) -> LettuceEncrypt.ILettuceEncryptServiceBuilder!
+static Microsoft.Extensions.DependencyInjection.MultiNodeLettuceEncryptServiceCollectionExtensions.AddNodeSlaveLettuceEncrypt(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> LettuceEncrypt.ILettuceEncryptServiceBuilder!
+static Microsoft.Extensions.DependencyInjection.MultiNodeLettuceEncryptServiceCollectionExtensions.AddNodeSlaveLettuceEncrypt(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, System.Action<LettuceEncrypt.LettuceEncryptOptions!>! configure) -> LettuceEncrypt.ILettuceEncryptServiceBuilder!
